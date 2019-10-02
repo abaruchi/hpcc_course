@@ -1,0 +1,34 @@
+
+// Algumas Definições
+EXPORT ModCPFG := MODULE
+
+  // Layout dos Dados
+  EXPORT CPGFLayout := RECORD
+    STRING CODIGO_ORGAO_SUPERIOR;
+    STRING NOME_ORGAO_SUPERIOR;
+    STRING CODIGO_ORGAO;
+    STRING NOME_ORGAO;
+    STRING CODIGO_UNIDADE_GESTORA;
+    STRING NOME_UNIDADE_GESTORA;
+    STRING ANO_EXTRATO;
+    STRING MES_EXTRATO;
+    STRING CPF_PORTADOR;
+    STRING NOME_PORTADOR;
+    STRING CNPJ_OU_CPF_FAVORECIDO;
+    STRING NOME_FAVORECIDO;
+    STRING TRANSACAO;
+    STRING DATA_TRANSACAO;
+    STRING VALOR_TRANSACAO;
+  END;
+
+  // Usar o layout para dados de verdade.. =)
+  EXPORT dataset_1 := DATASET('~workshop::XX::201909_cpgf', CPGFLayout, CSV(heading(1)));
+  EXPORT dataset_2 := DATASET('~workshop::XX::201909_cpgf', CPGFLayout, CSV(heading(1)));
+  EXPORT dataset_3 := DATASET('~workshop::XX::201909_cpgf', CPGFLayout, CSV(heading(1)));
+  
+  // Juntamos tudo e temos um único dataset
+  EXPORT DatasetCPFG := dataset_1 + dataset_2 + dataset_3;
+END;
+
+// Ação: Moste o dataset final!
+OUTPUT(ModCPFG.DatasetCPFG);
